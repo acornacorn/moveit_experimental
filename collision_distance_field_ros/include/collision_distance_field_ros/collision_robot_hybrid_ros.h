@@ -40,6 +40,7 @@
 #include <ros/ros.h>
 #include <collision_distance_field_ros/collision_distance_field_ros_helpers.h>
 #include <collision_distance_field/collision_robot_hybrid.h>
+#include <collision_distance_field/collision_world_hybrid.h>
 
 namespace collision_detection {
 
@@ -67,6 +68,16 @@ public:
     initializeRobotDistanceField(coll_spheres, size_x, size_y, size_z, use_signed_distance_field, resolution, collision_tolerance, max_propogation_distance);
   }
 };
+
+class CollisionDetectorAllocatorHybridROS : public CollisionDetectorAllocatorTemplate<CollisionWorldHybrid, CollisionRobotHybridROS, CollisionDetectorAllocatorHybridROS>
+{
+public:
+  virtual const std::string& getName()
+  {
+    return ::collision_detection::CollisionDetectorAllocatorHybrid::NAME_;
+  }
+};
+
 
 }
 
